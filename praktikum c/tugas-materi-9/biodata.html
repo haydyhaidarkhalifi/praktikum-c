@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Biodata Diri | Profil Pribadi</title>
+    <!-- Google Fonts untuk tipografi elegan -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (Free Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f7 0%, #d9e2ec 100%);
+            font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1a2c3e;
+        }
+
+        /* Container utama */
+        .biodata-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* Header dengan background gradien */
+        .header-bio {
+            background: linear-gradient(135deg, #1e3c72 0%, #2b4c7c 50%, #0f2c4f 100%);
+            padding: 2rem 2rem 1.8rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .avatar-wrapper {
+            display: inline-block;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 50%;
+            padding: 0.35rem;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .avatar {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid white;
+            background: #f0f4fa;
+        }
+
+        .header-bio h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        .header-bio .tagline {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            margin-top: 0.5rem;
+        }
+
+        /* konten utama grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+            background: #fff;
+        }
+
+        /* sidebar kiri (info kontak & detail) */
+        .sidebar {
+            background: #f9fbfd;
+            padding: 2rem 1.8rem;
+            border-right: 1px solid #e2edf2;
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3c72;
+            border-left: 4px solid #2b6a9f;
+            padding-left: 0.75rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #2c3e4e;
+            flex-wrap: wrap;
+        }
+
+        .contact-item i {
+            width: 32px;
+            height: 32px;
+            background: #e9f0f5;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #1e5a88;
+            font-size: 1rem;
+        }
+
+        .contact-item span {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .detail-list {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .detail-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #dce5ec;
+            font-size: 0.9rem;
+        }
+
+        .detail-list .label {
+            font-weight: 600;
+            color: #2c4f6e;
+        }
+
+        .detail-list .value {
+            color: #1e2f3c;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            background: #eef3f8;
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+            color: #1e5a88;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: #1e5a88;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* sisi kanan: riwayat, pendidikan, keahlian */
+        .main-content {
+            padding: 2rem 2rem 2rem 2rem;
+            background: #ffffff;
+        }
+
+        .bio-card {
+            margin-bottom: 2rem;
+        }
+
+        .bio-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0c2e47;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2edf2;
+            padding-bottom: 0.5rem;
+        }
+
+        .bio-card h3 i {
+            color: #2b6a9f;
+            font-size: 1.25rem;
+        }
+
+        .about-text {
+            color: #2c4258;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .skill-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .skill-badge span {
+            background: #eef2f9;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a4d74;
+            transition: 0.1s;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0f3b5c;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            background: #eaf1f7;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #2c6288;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: #4a627a;
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cbdde9, transparent);
+        }
+
+        /* footer */
+        .footer-bio {
+            background: #f2f6fa;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: #5b7a99;
+            border-top: 1px solid #e0eef5;
+        }
+
+        /* Responsive */
+        @media (max-width: 760px) {
+            body {
+                padding: 1rem;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                border-right: 0;
+                border-bottom: 1px solid #e2edf2;
+                padding: 1.5rem;
+            }
+            .main-content {
+                padding: 1.5rem;
+            }
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .header-bio h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* tombol print sederhana (opsional) */
+        .print-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .print-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+            .biodata-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .social-links a {
+                background: #eef3f8;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="biodata-container">
+    <div class="header-bio">
+        <div class="avatar-wrapper">
+            <!-- Menggunakan placeholder gambar via placeholder SVG (avatar generik) 
+                 agar tampil menarik tanpa gambar eksternal. Bisa diganti url foto asli -->
+            <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='30' fill='%233f7e9c'/%3E%3Ccircle cx='50' cy='45' r='28' fill='%235c9cbd'/%3E%3Ccircle cx='35' cy='38' r='3' fill='white'/%3E%3Ccircle cx='65' cy='38' r='3' fill='white'/%3E%3Cpath d='M40 58 Q50 68 60 58' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"
+                 alt="Avatar placeholder">
+        </div>
+        <h1>Haydy Haidar Khalifi</h1>
+        <div class="tagline">
+            <i class="fas fa-laptop-code"></i>  Frontend Developer & UI Enthusiast
+        </div>
+        <div>
+            <button class="print-btn" id="printBioBtn"><i class="fas fa-print"></i> Cetak Biodata</button>
+        </div>
+    </div>
+    
+    <div class="content-grid">
+        <!-- Bagian Kiri: Kontak & Data Diri -->
+        <aside class="sidebar">
+            <div class="info-section">
+                <h3><i class="fas fa-address-card"></i> Kontak</h3>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+62 813 8938 9265</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>haydyhaidarkhalifi@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kabupaten Tangerang, Banten, Indonesia</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>github.com/haydyhaidarkhalifi</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-user-circle"></i> Detail Pribadi</h3>
+                <ul class="detail-list">
+                    <li><span class="label">Tempat, Tgl Lahir</span><span class="value">Cirebon, 24 Agustus 2007</span></li>
+                    <li><span class="label">Jenis Kelamin</span><span class="value">Laki-laki</span></li>
+                    <li><span class="label">Agama</span><span class="value">Islam</span></li>
+                    <li><span class="label">Kewarganegaraan</span><span class="value">Indonesia</span></li>
+                    <li><span class="label">Bahasa</span><span class="value">Indonesia (native), Inggris (aktif)</span></li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-share-alt"></i> Media Sosial</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Bagian Kanan: Tentang, Pendidikan, Pengalaman, Skill -->
+        <main class="main-content">
+            <div class="bio-card">
+                <h3><i class="fas fa-user-astronaut"></i> Tentang Saya</h3>
+            </div>
+
+            <div class="bio-card">
+                <h3><i class="fas fa-graduation-cap"></i> Riwayat Pendidikan</h3>
+                <div class="timeline-item">
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">
+                        <span>📚 SMKN 7 KAB. TANGERANG (TKR)</span>
+                        <span class="timeline-date">2022 - 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bio-card">
+                <h3><i class="fas fa-cogs"></i> Keahlian & Kompetensi</h3>
+                <div class="skill-badge">
+                    <span>HTML5 & CSS3</span>
+                    <span>JavaScript (ES6+)</span>
+                    <span>React.js</span>
+                    <span>Tailwind CSS</span>
+                    <span>Git & Github</span>
+                    <span>Figma</span>
+                    <span>REST API</span>
+                    <span>Responsive Design</span>
+                    <span>Vue.js (Basic)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bio-card">
+                <h3><i class="fas fa-heart"></i> Minat & Hobi</h3>
+                <div class="skill-badge" style="gap: 0.5rem;">
+                    <span>📷 Fotografi</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="footer-bio">
+        <i class="far fa-copyright"></i> 2026 Haydy Haidar Khalifi — Biodata terbaru diperbarui May 2026
+    </div>
+</div>
+
+<!-- Script untuk tombol cetak dan interaksi kecil -->
+<script>
+    (function() {
+        const printBtn = document.getElementById('printBioBtn');
+        if (printBtn) {
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+        }
+
+        // Tambahan efek smooth hover (opsional, hanya demo)
+        const socialIcons = document.querySelectorAll('.social-links a');
+        socialIcons.forEach(icon => {
+            icon.addEventListener('mouseenter', function(e) {
+                // efek tambahan tidak mengganggu
+            });
+        });
+
+        // Log console sederhana (tidak diperlukan namun menunjukkan bahwa halaman siap)
+        console.log("Halaman biodata dinamis siap digunakan - dibuat dengan HTML/CSS/JS");
+    })();
+</script>
+</body>
+</html>

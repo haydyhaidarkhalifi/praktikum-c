@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Universitas Nusantara Jaya | Profil Kampus Unggulan</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library (untuk animasi scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c6e9e;
+            border-radius: 10px;
+        }
+
+        /* navbar */
+        .navbar {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 0.9rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            background: #1e4a76;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+        }
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #0f3b5c;
+        }
+        .logo-text span {
+            color: #e67e22;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c3e4e;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #e67e22;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.7rem;
+            cursor: pointer;
+        }
+
+        /* hero section */
+        .hero {
+            background: linear-gradient(135deg, #102b3f 0%, #1b4f72 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "📚";
+            font-size: 15rem;
+            opacity: 0.05;
+            position: absolute;
+            bottom: -50px;
+            right: -30px;
+            pointer-events: none;
+        }
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,215,175,0.2);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        /* container umum */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* visi misi */
+        .vision-mission {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card-vm {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            border: 1px solid #eef2f6;
+        }
+        .card-vm h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e4a76;
+        }
+        .icon-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+        .icon-title i {
+            font-size: 2rem;
+            color: #e67e22;
+        }
+
+        /* statistik kampus */
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            background: white;
+            border-radius: 2rem;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #e67e22;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4a627a;
+        }
+
+        /* fakultas grid */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #0f2f44;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #e67e22;
+            margin: 0.8rem auto 0;
+            border-radius: 4px;
+        }
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+        .faculty-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.25s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f0;
+        }
+        .faculty-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+            border-color: #f0cfb0;
+        }
+        .faculty-icon {
+            background: #eef6fc;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: #1e5a88;
+        }
+        .faculty-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* prestasi */
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .achievement-item {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            border-left: 5px solid #e67e22;
+        }
+        .achievement-item i {
+            font-size: 2rem;
+            color: #e67e22;
+        }
+
+        /* galeri */
+        .gallery {
+            background: #f1f5f9;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 1rem 0;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        .gallery-item {
+            background: white;
+            border-radius: 1.2rem;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+            background-size: cover;
+            background-position: center;
+            color: #334e68;
+            font-weight: 500;
+        }
+        .gallery-item span {
+            background: rgba(0,0,0,0.5);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        /* footer */
+        .footer {
+            background: #0a2a3b;
+            color: #cbd5e1;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .footer a {
+            color: #f3b987;
+            text-decoration: none;
+        }
+        .social-icons {
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .social-icons a {
+            background: #1f4b6e;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .social-icons a:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+        }
+
+        /* responsive */
+        @media (max-width: 780px) {
+            .navbar {
+                padding: 0.8rem 1.2rem;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 1.9rem;
+            }
+            .vision-mission {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 2rem 1rem;
+            }
+            .stats-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        button, .cta-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <div class="logo-icon"><i class="fas fa-university"></i></div>
+        <div class="logo-text">UNJ <span>• Nusantara Jaya</span></div>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#fakultas">Fakultas</a></li>
+        <li><a href="#prestasi">Prestasi</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content" data-aos="fade-up">
+        <h1>Universitas Nusantara Jaya</h1>
+        <p>Menjadi pusat keunggulan akademik berlandaskan inovasi, kearifan lokal, dan daya saing global.</p>
+        <div class="hero-badge"><i class="fas fa-award"></i> Terakreditasi Unggul BAN-PT  •  Kampus Riset & Digital</div>
+    </div>
+</section>
+
+<div class="container" id="profil">
+    <!-- Visi Misi -->
+    <div class="vision-mission" data-aos="fade-right">
+        <div class="card-vm">
+            <div class="icon-title"><i class="fas fa-eye"></i><h3>Visi</h3></div>
+            <p>Menjadi Universitas terkemuka di Asia Tenggara pada tahun 2035 yang melahirkan lulusan berkarakter, berwawasan lingkungan, serta mampu bersaing di era revolusi industri 5.0.</p>
+        </div>
+        <div class="card-vm" data-aos="fade-left">
+            <div class="icon-title"><i class="fas fa-bullseye"></i><h3>Misi</h3></div>
+            <ul style="margin-left: 1.2rem; line-height: 1.6;">
+                <li>Menyelenggarakan pendidikan tinggi berkualitas berbasis riset dan teknologi.</li>
+                <li>Mengembangkan kolaborasi global dengan industri dan perguruan tinggi dunia.</li>
+                <li>Menciptakan inovasi untuk pembangunan berkelanjutan.</li>
+                <li>Membentuk generasi berintegritas dan berkemampuan kepemimpinan.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Statistik Singkat -->
+    <div class="stats-grid" data-aos="zoom-in">
+        <div class="stat-item"><div class="stat-number">12.500+</div><div class="stat-label">Mahasiswa Aktif</div></div>
+        <div class="stat-item"><div class="stat-number">9</div><div class="stat-label">Fakultas</div></div>
+        <div class="stat-item"><div class="stat-number">48</div><div class="stat-label">Program Studi</div></div>
+        <div class="stat-item"><div class="stat-number">350+</div><div class="stat-label">Dosen Berkualitas</div></div>
+        <div class="stat-item"><div class="stat-number">25+</div><div class="stat-label">Mitra Internasional</div></div>
+    </div>
+
+    <!-- Sambutan Rektor (singkat) -->
+    <div style="background: #e9f2f5; border-radius: 24px; padding: 1.8rem; margin: 2rem 0;" data-aos="fade-up">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <div style="background:#1e4a76; border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2rem;"><i class="fas fa-chalkboard-user" style="color:white;"></i></div>
+            <div><strong style="font-size: 1.1rem;">Prof. Dr. H. Ahmad Wijaya, M.Sc.</strong><br> Rektor Universitas Nusantara Jaya</div>
+        </div>
+        <p style="margin-top: 1rem; font-style: italic;">“Kami berkomitmen untuk mencetak generasi yang tidak hanya cerdas secara intelektual, tetapi juga memiliki empati dan keterampilan abad 21. Selamat bergabung dalam perjalanan mengubah masa depan!”</p>
+    </div>
+
+    <!-- Fakultas -->
+    <h2 class="section-title" id="fakultas">📚 Fakultas & Program Unggulan</h2>
+    <div class="faculty-grid" data-aos="fade-up">
+        <div class="faculty-card"><div class="faculty-icon"><i class="fas fa-laptop-code"></i></div><h4>Fakultas Ilmu Komputer</h4><p>Informatika, Sistem Informasi, Data Science</p></div>
+        <div class="faculty-card"><div class="faculty-icon"><i class="fas fa-chart-line"></i></div><h4>Fakultas Ekonomi & Bisnis</h4><p>Manajemen, Akuntansi, Bisnis Digital</p></div>
+        <div class="faculty-card"><div class="faculty-icon"><i class="fas fa-microscope"></i></div><h4>Fakultas Teknik</h4><p>Teknik Sipil, Elektro, Industri, Mesin</p></div>
+        <div class="faculty-card"><div class="faculty-icon"><i class="fas fa-gavel"></i></div><h4>Fakultas Hukum</h4><p>Ilmu Hukum (Hukum Bisnis & Kenegaraan)</p></div>
+        <div class="faculty-card"><div class="faculty-icon"><i class="fas fa-psychology"></i></div><h4>Fakultas Psikologi & Pendidikan</h4><p>Psikologi, PGSD, Bimbingan Konseling</p></div>
+        <div class="faculty-card"><div class="faculty-icon"><i class="fas fa-leaf"></i></div><h4>Fakultas Pertanian</h4><p>Agroteknologi, Agribisnis, Teknologi Pangan</p></div>
+    </div>
+
+    <!-- Prestasi Kampus -->
+    <h2 class="section-title" id="prestasi">🏆 Prestasi & Penghargaan</h2>
+    <div class="achievement-list" data-aos="fade-up">
+        <div class="achievement-item"><i class="fas fa-trophy"></i><div><strong>Peringkat 1 Kampus Swasta Terbaik se-Indonesia</strong><br>Webometrics 2025</div></div>
+        <div class="achievement-item"><i class="fas fa-medal"></i><div><strong>Juara Umum PKM Nasional</strong><br> 12 medali di PIMNAS 2024</div></div>
+        <div class="achievement-item"><i class="fas fa-globe"></i><div><strong>Green Campus Award 2025</strong><br>UI GreenMetric peringkat 8 Asia</div></div>
+        <div class="achievement-item"><i class="fas fa-robot"></i><div><strong>Innovation Hub Terbaik 2024</strong><br>Kategori Digital Transformation</div></div>
+    </div>
+
+    <!-- Galeri kampus (konsep ikonik) -->
+    <h2 class="section-title" id="galeri">📸 Suasana Kampus</h2>
+    <div class="gallery" data-aos="fade-up">
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placehold.co/600x400/e6eef5/4a6f8c?text=Library+Modern'); background-size: cover;"><span>📖 Perpustakaan Digital</span></div>
+            <div class="gallery-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placehold.co/600x400/d9e3ed/2c6e9e?text=Student+Center'); background-size: cover;"><span>🏛️ Student Activity Center</span></div>
+            <div class="gallery-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placehold.co/600x400/cbdae6/1e5f8c?text=Laboratorium+AI'); background-size: cover;"><span>🤖 Lab Riset AI</span></div>
+            <div class="gallery-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placehold.co/600x400/bdd3e8/2a6f96?text=Stadion'); background-size: cover;"><span>⚽ Stadion & Sport Center</span></div>
+        </div>
+        <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem;"><i class="fas fa-location-dot"></i> Lokasi: Kampus Terpadu Jl. Pendidikan No. 99, Kota Malang, Indonesia</p>
+    </div>
+
+    <!-- Alamat & informasi kontak -->
+    <div id="kontak" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin: 2rem 0;" data-aos="fade-up">
+        <div style="flex:1; background: white; border-radius: 1.5rem; padding: 1.5rem;">
+            <i class="fas fa-map-pin" style="font-size: 2rem; color:#e67e22;"></i>
+            <h3>Kantor Pusat</h3>
+            <p>Jl. Pendidikan Raya No.99, Lowokwaru, Malang, Jawa Timur 65145</p>
+            <p><i class="fas fa-phone-alt"></i> (0341) 5678901</p>
+            <p><i class="fas fa-envelope"></i> info@unj.ac.id</p>
+        </div>
+        <div style="flex:1; background: white; border-radius: 1.5rem; padding: 1.5rem;">
+            <i class="fas fa-clock" style="font-size: 2rem; color:#e67e22;"></i>
+            <h3>Jam Operasional</h3>
+            <p>Senin - Jumat : 08.00 - 16.30 WIB<br>Sabtu : 08.00 - 13.00 WIB (layanan administrasi)<br>Minggu & Hari Libur Nasional : Tutup</p>
+        </div>
+    </div>
+</div>
+
+<footer class="footer" id="kontak">
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>© 2026 Universitas Nusantara Jaya. Membangun Generasi Berkemajuan.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.7rem;"><i class="fas fa-heart" style="color:#e67e22;"></i> Akreditasi Unggul · Kampus Merdeka · MBKM Partner</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Inisialisasi AOS animasi
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+
+    // mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    }
+
+    // smooth scrolling untuk navigasi
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (navLinks.classList.contains('show')) navLinks.classList.remove('show');
+            }
+        });
+    });
+</script>
+</body>
+</html>

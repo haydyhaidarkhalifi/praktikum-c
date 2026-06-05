@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Menu Lezat - Daftar Makanan Nusantara & Modern</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fef9e6 0%, #fff3e0 100%);
+            font-family: 'Quicksand', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #2d2a24;
+        }
+
+        /* container utama */
+        .menu-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* header restoran */
+        .menu-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .menu-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c26e2c, #a5571e, #7c3f12);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            display: inline-block;
+        }
+        .menu-header .subhead {
+            font-size: 1.1rem;
+            color: #b87a4b;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            border-top: 2px solid #f0cfb0;
+            display: inline-block;
+            padding-top: 0.6rem;
+        }
+        .chef-icon {
+            font-size: 2.5rem;
+            color: #e0a46b;
+            margin-bottom: 0.5rem;
+        }
+
+        /* kategori filter */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+        .filter-btn {
+            background: white;
+            border: none;
+            padding: 0.6rem 1.6rem;
+            border-radius: 50px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #5e3a22;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .filter-btn i {
+            font-size: 0.9rem;
+        }
+        .filter-btn.active {
+            background: #c26e2c;
+            color: white;
+            box-shadow: 0 6px 14px rgba(194,110,44,0.25);
+        }
+        .filter-btn:hover:not(.active) {
+            background: #f5e2cf;
+            transform: translateY(-2px);
+        }
+
+        /* grid menu */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        /* kartu makanan */
+        .menu-card {
+            background: #ffffff;
+            border-radius: 1.8rem;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            backdrop-filter: blur(0px);
+            border: 1px solid rgba(241, 181, 112, 0.2);
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 36px -12px rgba(156, 86, 22, 0.25);
+        }
+        .card-img {
+            height: 190px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 0.8rem;
+        }
+        .badge-category {
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(6px);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .card-content {
+            padding: 1.3rem 1.2rem 1.5rem;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #352418;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #c26e2c;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .description {
+            font-size: 0.85rem;
+            color: #6b5846;
+            margin: 0.6rem 0 1rem;
+            line-height: 1.4;
+        }
+        .order-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed #f3e0ce;
+            padding-top: 0.8rem;
+            margin-top: 0.2rem;
+        }
+        .rating {
+            color: #f5b642;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .rating span {
+            color: #8b735a;
+            margin-left: 4px;
+        }
+        .add-tag {
+            background: #fef1e6;
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #bc6f2c;
+        }
+
+        /* footer & catatan */
+        .menu-footer {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding: 1.5rem;
+            background: #fff9f0;
+            border-radius: 2rem;
+            color: #b27d52;
+            font-size: 0.85rem;
+            border: 1px solid #fae2cb;
+        }
+
+        /* animasi filter */
+        .menu-card {
+            animation: fadeInUp 0.4s ease backwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* responsive touch */
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem;
+            }
+            .menu-header h1 {
+                font-size: 2rem;
+            }
+            .filter-btn {
+                padding: 0.4rem 1.2rem;
+                font-size: 0.8rem;
+            }
+            .menu-grid {
+                gap: 1.2rem;
+            }
+        }
+
+        /* gaya custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faeedf;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c98144;
+            border-radius: 10px;
+        }
+        .note-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2e241d;
+            color: #ffefdb;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            z-index: 99;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.2s;
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu-wrapper">
+    <div class="menu-header">
+        <div class="chef-icon">
+            <i class="fas fa-utensils"></i> <i class="fas fa-mug-hot"></i>
+        </div>
+        <h1>🍽️ Saung Rasa Nusantara</h1>
+        <div class="subhead">Nikmati kelezatan autentik & modern • Bikin nagih setiap suapan</div>
+    </div>
+
+    <!-- Filter Kategori -->
+    <div class="filter-section" id="filterSection">
+        <button class="filter-btn active" data-category="all"><i class="fas fa-border-all"></i> Semua</button>
+        <button class="filter-btn" data-category="indonesia"><i class="fas fa-leaf"></i> Nusantara</button>
+        <button class="filter-btn" data-category="western"><i class="fas fa-hamburger"></i> Western</button>
+        <button class="filter-btn" data-category="asian"><i class="fas fa-egg"></i> Asian Fusion</button>
+        <button class="filter-btn" data-category="dessert"><i class="fas fa-cake-candles"></i> Dessert</button>
+        <button class="filter-btn" data-category="beverage"><i class="fas fa-coffee"></i> Minuman</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <div class="menu-footer">
+        <i class="fas fa-credit-card"></i> Harga sudah termasuk pajak  •  Tersedia layanan antar & pesan takeaway  •  
+        <i class="fas fa-heart" style="color:#e67e22;"></i> Happy Hour: diskon 10% untuk semua menu setiap Senin 15.00-17.00
+    </div>
+</div>
+<div id="toastMsg" class="note-popup">✨ Ditambahkan ke pesanan (demo)</div>
+
+<script>
+    // Data daftar menu makanan
+    const menuData = [
+        { id: 1, name: "Nasi Goreng Kampung", category: "indonesia", price: 35000, rating: 4.8, description: "Nasi goreng dengan bumbu rempah pilihan, ayam suwir, telur mata sapi, dan kerupuk merah.", imgLabel: "Nasi Goreng", badge: "🔥 Favorit" },
+        { id: 2, name: "Sate Ayam Madura", category: "indonesia", price: 42000, rating: 4.9, description: "10 tusuk sate ayam dengan bumbu kacang spesial, lontong, dan acar.", imgLabel: "Sate Ayam" },
+        { id: 3, name: "Rendang Sapi", category: "indonesia", price: 55000, rating: 4.9, description: "Daging sapi dimasak dengan santan dan rempak khas padang, empuk dan kaya rasa.", imgLabel: "Rendang" },
+        { id: 4, name: "Gado-Gado", category: "indonesia", price: 28000, rating: 4.6, description: "Sayuran rebus dengan bumbu kacang gurih, lontong, dan kerupuk.", imgLabel: "Gado-Gado", badge: "Vegetarian" },
+        { id: 5, name: "Chicken Katsu Don", category: "asian", price: 39000, rating: 4.7, description: "Nasi hangat dengan chicken katsu crispy, saus teriyaki, telur & sayuran.", imgLabel: "Katsu Don" },
+        { id: 6, name: "Beef Teriyaki", category: "asian", price: 52000, rating: 4.8, description: "Sliced beef dengan saus teriyaki manis gurih, dilengkapi salad dan edamame.", imgLabel: "Beef Teriyaki" },
+        { id: 7, name: "Spaghetti Aglio Olio", category: "western", price: 45000, rating: 4.6, description: "Spaghetti dengan minyak zaitun, bawang putih, cabai, dan topping jamur.", imgLabel: "Spaghetti" },
+        { id: 8, name: "Cheeseburger Deluxe", category: "western", price: 58000, rating: 4.7, description: "Beef patty, keju leleh, selada, tomat, saus spesial, kentang goreng.", imgLabel: "Burger" },
+        { id: 9, name: "Pizza Margherita", category: "western", price: 69000, rating: 4.5, description: "Pizza dengan saus tomat, mozzarella, basil segar, dan minyak zaitun.", imgLabel: "Pizza" },
+        { id: 10, name: "Es Campur", category: "dessert", price: 23000, rating: 4.8, description: "Serutan es dengan buah segar, cincau, kolang-kaling, dan sirup cocopandan.", imgLabel: "Es Campur" },
+        { id: 11, name: "Pisang Goreng Crispy", category: "dessert", price: 19000, rating: 4.7, description: "Pisang goreng dengan tepung panir, toping keju & meses, saus coklat.", imgLabel: "Pisgor", badge: "Best Seller" },
+        { id: 12, name: "Es Teh Tarik", category: "beverage", price: 12000, rating: 4.5, description: "Teh tarik khas dengan rasa creamy dan aroma rempah.", imgLabel: "Teh Tarik" },
+        { id: 13, name: "Lemon Mint Iced Tea", category: "beverage", price: 18000, rating: 4.6, description: "Kesegaran lemon dan mint, tambahan madu alami.", imgLabel: "Lemon Tea" },
+        { id: 14, name: "Matcha Latte", category: "beverage", price: 28000, rating: 4.7, description: "Matcha premium dengan susu pilihan, cocok untuk menemani waktu santai.", imgLabel: "Matcha" },
+        { id: 15, name: "Mie Ayam Jamur", category: "indonesia", price: 32000, rating: 4.8, description: "Mie kenyal dengan ayam kecap, jamur, sawi, dan pangsit goreng.", imgLabel: "Mie Ayam" },
+        { id: 16, name: "Salad Bowl (Quinoa)", category: "western", price: 37000, rating: 4.4, description: "Quinoa, alpukat, sayuran mix, chicken breast, dressing lemon.", imgLabel: "Salad", badge: "Sehat" }
+    ];
+
+    // image mapping sederhana menggunakan emoji / placeholder visual dengan background menarik (warna gradien dan ikon)
+    // supaya tampil estetis tanpa perlu gambar eksternal (bisa juga diganti url)
+    const getCardImageStyle = (item) => {
+        const colorMap = {
+            indonesia: "linear-gradient(125deg, #f7a35c, #f07c3c)",
+            western: "linear-gradient(125deg, #dd9980, #be6a48)",
+            asian: "linear-gradient(125deg, #72b394, #318f66)",
+            dessert: "linear-gradient(125deg, #f5bc8e, #e6996a)",
+            beverage: "linear-gradient(125deg, #96bfc6, #5c9ea8)"
+        };
+        let mainCat = item.category;
+        let bgGrad = colorMap[mainCat] || "linear-gradient(125deg, #e4bc8a, #cb8f5e)";
+        // icon representative
+        let iconHtml = "";
+        if (item.name.includes("Nasi") || item.name.includes("Rendang")) iconHtml = "🍛";
+        else if (item.name.includes("Sate")) iconHtml = "🍢";
+        else if (item.name.includes("Spaghetti") || item.name.includes("Pizza")) iconHtml = "🍕";
+        else if (item.name.includes("Burger")) iconHtml = "🍔";
+        else if (item.name.includes("Katsu") || item.name.includes("Teriyaki")) iconHtml = "🍱";
+        else if (item.name.includes("Campur") || item.name.includes("Pisang")) iconHtml = "🍧";
+        else if (item.category === "beverage") iconHtml = "🥤";
+        else iconHtml = "🍽️";
+        
+        // tambahan teks untuk preview
+        return `background: ${bgGrad}; background-size: cover; display: flex; align-items: center; justify-content: center; font-size: 3.8rem; text-shadow: 0 2px 10px rgba(0,0,0,0.2);`;
+    };
+
+    const renderMenu = (categoryFilter = "all") => {
+        const grid = document.getElementById("menuGrid");
+        if (!grid) return;
+        
+        let filteredItems = menuData;
+        if (categoryFilter !== "all") {
+            filteredItems = menuData.filter(item => item.category === categoryFilter);
+        }
+        
+        if (filteredItems.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-utensils" style="font-size:3rem; opacity:0.5;"></i><p style="margin-top:1rem;">Tidak ada menu untuk kategori ini</p></div>`;
+            return;
+        }
+        
+        let cardsHtml = "";
+        filteredItems.forEach(item => {
+            // format rupiah
+            const formatter = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 });
+            const priceFormatted = formatter.format(item.price);
+            const ratingStar = `<i class="fas fa-star"></i> ${item.rating}`;
+            const badgeExtra = item.badge ? `<span class="add-tag">${item.badge}</span>` : '';
+            
+            // background style gambar
+            const bgStyle = getCardImageStyle(item);
+            // membuat icon + nama depan singkat
+            let iconEmoji = "";
+            if (item.name.includes("Nasi")) iconEmoji = "🍚";
+            else if (item.name.includes("Sate")) iconEmoji = "🍢";
+            else if (item.name.includes("Rendang")) iconEmoji = "🍖";
+            else if (item.name.includes("Gado")) iconEmoji = "🥗";
+            else if (item.name.includes("Katsu")) iconEmoji = "🍗";
+            else if (item.name.includes("Spaghetti")) iconEmoji = "🍝";
+            else if (item.name.includes("Pizza")) iconEmoji = "🍕";
+            else if (item.name.includes("Burger")) iconEmoji = "🍔";
+            else if (item.name.includes("Es")) iconEmoji = "🍧";
+            else if (item.name.includes("Pisang")) iconEmoji = "🍌";
+            else if (item.category === "beverage") iconEmoji = "🥤";
+            else if (item.category === "dessert") iconEmoji = "🍰";
+            else iconEmoji = "🍜";
+            
+            cardsHtml += `
+                <div class="menu-card" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                    <div class="card-img" style="${bgStyle}">
+                        <div style="background:rgba(0,0,0,0.45); padding: 0.5rem 1rem; border-radius: 40px; font-size: 1.8rem; line-height:1;">
+                            ${iconEmoji}
+                        </div>
+                        <div class="badge-category">${item.category === 'indonesia' ? '🇮🇩 Nusantara' : item.category === 'western' ? '🍔 Western' : item.category === 'asian' ? '🥢 Asian' : item.category === 'dessert' ? '🍰 Manis' : '🧃 Segar'}</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">
+                            <span>${item.name}</span>
+                            <span class="price">${priceFormatted}</span>
+                        </div>
+                        <div class="description">${item.description}</div>
+                        <div class="order-info">
+                            <div class="rating">${ratingStar} <span>(populer)</span></div>
+                            <div style="display: flex; gap: 8px;">
+                                ${badgeExtra}
+                                <button class="add-tag order-btn" style="background:#c26e2c; color:white; border:none; cursor:pointer;"><i class="fas fa-cart-plus"></i> Pesan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        grid.innerHTML = cardsHtml;
+        
+        // tambahkan event listener ke tombol order setelah render
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = btn.closest('.menu-card');
+                const name = card.getAttribute('data-name') || "Menu";
+                showToast(`🛒 ${name} ditambahkan ke keranjang (demo)`);
+            });
+        });
+        
+        // tambahkan juga klik pada card untuk efek preview (optional)
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if(e.target.classList.contains('order-btn')) return;
+                const name = card.getAttribute('data-name');
+                if(name) showToast(`✨ Lihat detail: ${name}`);
+            });
+        });
+    };
+    
+    // fungsi notifikasi kecil
+    let toastTimeout;
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        if(!toast) return;
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+        toast.innerText = msg;
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.style.opacity = '0';
+        }, 1800);
+    }
+    
+    // filter logic
+    const initFilters = () => {
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
+                if(!category) return;
+                // update active class
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMenu(category);
+                // scroll sedikit ke grid
+                document.getElementById('menuGrid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    };
+    
+    // inisialisasi awal
+    renderMenu('all');
+    initFilters();
+</script>
+</body>
+</html>

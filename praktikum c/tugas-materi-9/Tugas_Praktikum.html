@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>UrbanThreads | Toko Baju & Jaket Kekinian</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', 'Inter', 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #1e1e2a;
+      line-height: 1.5;
+    }
+
+    /* container utama */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========== HEADER ========== */
+    .main-header {
+      background: linear-gradient(135deg, #0b2b26 0%, #1f4e3f 100%);
+      color: white;
+      padding: 2rem 0 1.8rem;
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo h1 {
+      font-size: 1.9rem;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+    }
+
+    .logo p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+
+    .search-badge {
+      background: rgba(255,255,255,0.18);
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    /* ========== NAVIGASI ========== */
+    .navbar {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.9rem 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2c3e2f;
+      transition: 0.2s;
+      font-size: 1rem;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: #0f5c4b;
+      border-bottom-color: #1f8a6e;
+    }
+
+    /* ========== SECTION (promo & filter) ========== */
+    .hero-section {
+      background: #e9f3ef;
+      border-radius: 2rem;
+      margin: 2rem 0;
+      padding: 2rem 2rem;
+      text-align: center;
+    }
+
+    .hero-section h2 {
+      font-size: 1.8rem;
+      color: #1e3b32;
+    }
+
+    .hero-section p {
+      max-width: 600px;
+      margin: 0.8rem auto 0;
+      color: #2d4a3e;
+    }
+
+    /* kategori grid */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      padding-left: 0.5rem;
+      border-left: 6px solid #2c7a5e;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    /* article card produk */
+    .product-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img {
+      background: #f2eee5;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .card-content {
+      padding: 1.2rem 1.2rem 1.4rem;
+    }
+
+    .product-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .product-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1f8a6e;
+      font-weight: 600;
+    }
+
+    .product-desc {
+      margin: 0.6rem 0;
+      color: #4a5562;
+      font-size: 0.9rem;
+    }
+
+    .price {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #145c46;
+      margin-top: 0.5rem;
+    }
+
+    .badge-saran {
+      background: #fff6e0;
+      border-left: 3px solid #e6b422;
+      padding: 0.6rem 1rem;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      border-radius: 14px;
+    }
+
+    .btn-beli {
+      background: #1f4e3f;
+      border: none;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      font-weight: 600;
+      margin-top: 1rem;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-beli:hover {
+      background: #0e382c;
+    }
+
+    /* artikel saran tambahan (extra) */
+    .suggestions-article {
+      background: #fef9e8;
+      border-radius: 1.8rem;
+      padding: 1.6rem 2rem;
+      margin: 2rem 0;
+      border: 1px solid #ffe2b5;
+    }
+
+    .suggestions-article h3 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #aa6f20;
+    }
+
+    .saran-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .saran-chip {
+      background: white;
+      border-radius: 40px;
+      padding: 0.5rem 1.2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      font-weight: 500;
+    }
+
+    /* footer */
+    .main-footer {
+      background: #0f2c24;
+      color: #cddfda;
+      margin-top: 3rem;
+      padding: 2rem 0 1.5rem;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-col p {
+      margin: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #2d5a4c;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 700px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER (semantic) ========== -->
+<header class="main-header">
+  <div class="container header-content">
+    <div class="logo">
+      <h1>👕 UrbanThreads</h1>
+      <p>wear your confidence | UMKM fashion lokal</p>
+    </div>
+    <div class="search-badge">
+      🚚 gratis ongkir · 14 hari retur
+    </div>
+  </div>
+</header>
+
+<!-- ========== NAV (semantic navigation) ========== -->
+<nav class="navbar">
+  <div class="container">
+    <ul class="nav-links">
+      <li><a href="#">🏠 Beranda</a></li>
+      <li><a href="#kaos">👕 Kaos</a></li>
+      <li><a href="#celana">👖 Celana</a></li>
+      <li><a href="#jaket">🧥 Jaket Sport</a></li>
+      <li><a href="#saran">💡 Saran Gaya</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <!-- SECTION hero / banner promosi -->
+  <section class="hero-section">
+    <h2>✨ Koleksi Limited Edisi ✨</h2>
+    <p>Nyaman, stylish, dan ramah di kantong. Dari kaos fitted hingga jaket sport — temukan gayamu di sini!</p>
+  </section>
+
+  <!-- SECTION 1: KAOS (fitted tee, grafis) -->
+  <section id="kaos">
+    <h2 class="section-title">👕 Kaos Pilihan Terbaik</h2>
+    <div class="product-grid">
+      <!-- article 1: Fitted Tee (model kaos fitted) -->
+      <article class="product-card">
+        <div class="card-img">👕✨</div>
+        <div class="card-content">
+          <div class="product-category">FITTED TEE</div>
+          <div class="product-title">Essential Fitted Tee</div>
+          <div class="product-desc">Premium cotton stretch, potongan modern yang mengikuti bentuk tubuh. Tersedia 5 warna netral.</div>
+          <div class="price">Rp 149.000</div>
+          <div class="badge-saran">💡 Saran: Padukan dengan jeans slim atau denim biru tua agar look kasual tetap rapi.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- article 2: Fitted Tee versi warna -->
+      <article class="product-card">
+        <div class="card-img">🎨👕</div>
+        <div class="card-content">
+          <div class="product-category">FITTED TEE</div>
+          <div class="product-title">Soft Ribbed Fitted</div>
+          <div class="product-desc">Bahan ribbed elastis, nyaman dipakai sehari-hari. Model fitted namun tetap fleksibel.</div>
+          <div class="price">Rp 159.000</div>
+          <div class="badge-saran">🌟 Rekomendasi: Padukan dengan jaket sport navy untuk tampilan sporty smart.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- article 3: Graphic Tee (grafis) -->
+      <article class="product-card">
+        <div class="card-img">🖼️👕</div>
+        <div class="card-content">
+          <div class="product-category">GRAPHIC TEE</div>
+          <div class="product-title">Urban Graphic Tee</div>
+          <div class="product-desc">Desain eksklusif dengan sablon ramah lingkungan, tema kota dan streetwear.</div>
+          <div class="price">Rp 179.000</div>
+          <div class="badge-saran">🎨 Saran gaya: Celana cargo atau denim sobek + sneakers putih = street look keren.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- article 4: Graphic Tee kedua -->
+      <article class="product-card">
+        <div class="card-img">🎸👕</div>
+        <div class="card-content">
+          <div class="product-category">GRAPHIC TEE</div>
+          <div class="product-title">Retro Wave Graphic</div>
+          <div class="product-desc">Nuansa vintage dengan ilustrasi musik & sunset, bahan katun 24s adem.</div>
+          <div class="price">Rp 169.000</div>
+          <div class="badge-saran">🔥 Mix & match dengan jaket sport bomber + denim gelap, tampil beda!</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECTION 2: CELANA (Jeans & Denim) -->
+  <section id="celana">
+    <h2 class="section-title">👖 Celana Koleksi Denim & Jeans</h2>
+    <div class="product-grid">
+      <!-- Jeans model straight -->
+      <article class="product-card">
+        <div class="card-img">👖💙</div>
+        <div class="card-content">
+          <div class="product-category">JEANS</div>
+          <div class="product-title">Classic Straight Jeans</div>
+          <div class="product-desc">Jeans denim biru indigo, potongan lurus nyaman, cocok untuk aktivitas harian.</div>
+          <div class="price">Rp 289.000</div>
+          <div class="badge-saran">✅ Padukan dengan fitted tee putih dan sneakers, effortless style.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- Denim slim -->
+      <article class="product-card">
+        <div class="card-img">👖🌀</div>
+        <div class="card-content">
+          <div class="product-category">DENIM</div>
+          <div class="product-title">Slim Denim Pants</div>
+          <div class="product-desc">Bahan denim stretch premium, warna washed black, slim fit modern.</div>
+          <div class="price">Rp 299.000</div>
+          <div class="badge-saran">✨ Rekomendasi: Pakai dengan graphic tee dan jaket sport biar keliatan edgy.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- Denim longgar / relaxed -->
+      <article class="product-card">
+        <div class="card-img">👖🌟</div>
+        <div class="card-content">
+          <div class="product-category">DENIM</div>
+          <div class="product-title">Relaxed Loose Denim</div>
+          <div class="product-desc">Denim dengan potongan wide leg, tren Y2K, nyaman dan kasual.</div>
+          <div class="price">Rp 319.000</div>
+          <div class="badge-saran">🔥 Saran gaya: Oversized tee + sneakers chunky, wajib coba!</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- Jeans alternatif -->
+      <article class="product-card">
+        <div class="card-img">👖⚡</div>
+        <div class="card-content">
+          <div class="product-category">JEANS</div>
+          <div class="product-title">Distressed Jeans</div>
+          <div class="product-desc">Detail robek di bagian lutut, gaya kasual street style.</div>
+          <div class="price">Rp 309.000</div>
+          <div class="badge-saran">🎸 Lengkapi dengan kaos grafis band dan jaket sport, auto hits!</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECTION 3: JAKET SPORT (jaket sport, jaket olahraga) -->
+  <section id="jaket">
+    <h2 class="section-title">🧥 Jaket Sport & Activewear</h2>
+    <div class="product-grid">
+      <!-- jaket sport bomber -->
+      <article class="product-card">
+        <div class="card-img">🧥🔥</div>
+        <div class="card-content">
+          <div class="product-category">JAKET SPORT</div>
+          <div class="product-title">Varsity Sport Jacket</div>
+          <div class="product-desc">Jaket bomber berbahan nylon & wool blend, cuttingan atletik, nyaman dipakai lari atau hangout.</div>
+          <div class="price">Rp 389.000</div>
+          <div class="badge-saran">🏆 Mix dengan celana denim slim atau jogger pants, tampil sporty elegan.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- jaket sport windbreaker -->
+      <article class="product-card">
+        <div class="card-img">💨🧥</div>
+        <div class="card-content">
+          <div class="product-category">JAKET SPORT</div>
+          <div class="product-title">Lightweight Windbreaker</div>
+          <div class="product-desc">Water-resistant, warna neon pastel, lipat menjadi tas kecil. Aktifitas outdoor.</div>
+          <div class="price">Rp 349.000</div>
+          <div class="badge-saran">🌈 Saran: Cocok dipakai untuk lari pagi dipadukan dengan celana training atau denim.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- jaket sport fleece -->
+      <article class="product-card">
+        <div class="card-img">🐏🧥</div>
+        <div class="card-content">
+          <div class="product-category">JAKET SPORT</div>
+          <div class="product-title">Sport Fleece Zip Up</div>
+          <div class="product-desc">Bahan fleece tebal namun ringan, jaket hangat untuk musim dingin atau ber-AC.</div>
+          <div class="price">Rp 429.000</div>
+          <div class="badge-saran">✅ Padukan dengan fitted tee + denim, gaya preppy sport.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+
+      <!-- jaket sport tracksuit style -->
+      <article class="product-card">
+        <div class="card-img">🏃🧥</div>
+        <div class="card-content">
+          <div class="product-category">JAKET SPORT</div>
+          <div class="product-title">Track Runner Jacket</div>
+          <div class="product-desc">Model half zip, bahan dry-fit, garis samping retro. Kece untuk lari atau daily casual.</div>
+          <div class="price">Rp 369.000</div>
+          <div class="badge-saran">🔥 Saran gaya: Pakai dengan celana jogger dan sneakers, vibes aktif seharian.</div>
+          <button class="btn-beli">Pilih Ukuran →</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== ARTICLE (Ekstra Saran Gaya + Tips) ========== -->
+  <article id="saran" class="suggestions-article">
+    <h3>✨ SARAN STYLE EKSKLUSIF DARI STYLIST KAMI ✨</h3>
+    <p>Kami selalu ingin pelanggan tampil maksimal. Berikut paduan rekomendasi untuk produk UrbanThreads :</p>
+    <div class="saran-list">
+      <span class="saran-chip">🧥 Fitted Tee + Jaket Sport + Denim = Smart Casual</span>
+      <span class="saran-chip">🎨 Graphic Tee + Jeans sobek + Sneakers high = Street Cred</span>
+      <span class="saran-chip">👖 Denim relaxed + kaos polos + windbreaker = Y2K vibe</span>
+      <span class="saran-chip">🏃 Jaket sport tracksuit + celana training = Athleisure</span>
+      <span class="saran-chip">💡 Mix and match warna earth tone: coklat, olive, navy biar effortless</span>
+      <span class="saran-chip">✨ Aksesoris: topi baseball atau sling bag tambah keren</span>
+    </div>
+    <p style="margin-top: 1rem; font-style: italic;">💬 "UMKM Lokal, kualitas impor — setiap produk diproduksi dengan etis dan berkelanjutan."</p>
+  </article>
+
+  <!-- tambahan artikel promosi tentang sustainable fashion (opsional namun memenuhi semantic article) -->
+  <article style="background: #eef2f0; border-radius: 1.5rem; padding: 1.4rem 1.8rem; margin: 1rem 0;">
+    <h3>🌱 Diproduksi oleh UMKM Nusantara</h3>
+    <p>UrbanThreads bangga menjadi wadah bagi pengrajin lokal. Setiap kaos, celana, dan jaket dibuat dengan memperhatikan detail serta kenyamanan. Dengan membeli produk kami, kamu mendukung ekonomi kreatif Indonesia. 🇮🇩</p>
+    <div style="display: flex; gap: 1rem; margin-top: 12px;">
+      <span>✅ Bahan ramah lingkungan</span>
+      <span>✅ Upah layak untuk pekerja</span>
+      <span>✅ Desain original</span>
+    </div>
+  </article>
+</main>
+
+<!-- ========== FOOTER (semantic) ========== -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>UrbanThreads</h4>
+        <p>Toko fashion online terpercaya #UMKMNaikKelas</p>
+        <p>📍 Berbasis di Bandung, tersedia kirim ke seluruh Indonesia</p>
+      </div>
+      <div class="footer-col">
+        <h4>Hubungi Kami</h4>
+        <p>📞 +62 812 3456 7890</p>
+        <p>✉️ hello@urbanthreads.id</p>
+        <p>🕒 Senin - Sabtu: 09.00 - 18.00</p>
+      </div>
+      <div class="footer-col">
+        <h4>Koleksi Lain</h4>
+        <p>Atasan · Bawahan · Jaket Sport · Aksesoris</p>
+        <p>New Arrivals setiap minggu ✨</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2026 UrbanThreads - UMKM Fashion Berkelanjutan. Seluruh hak cipta dilindungi.</p>
+      <p style="margin-top: 6px;">💚 Jagoan lokal, bangga Indonesia</p>
+    </div>
+  </div>
+</footer>
+
+<!-- (optional interaksi sederhana untuk tombol, hanya simulasi) -->
+<script>
+  // hanya memberikan alert ramah pada tombol "Pilih Ukuran" untuk demonstrasi interaksi
+  document.querySelectorAll('.btn-beli').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Terima kasih! Fitur pilih ukuran tersedia di halaman detail produk. (Demo UMKM)');
+    });
+  });
+</script>
+</body>
+</html>
