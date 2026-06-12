@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napoleon Bonaparte | Sejarah Prancis</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d5 100%);
+            color: #2c241a;
+            line-height: 1.6;
+        }
+
+        /* ========== NAVBAR FLEXBOX ========== */
+        .navbar {
+            background: #1a1a2e;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #F9F6EE;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #ffd700;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/napoleon-background.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* ========== SECTION TITLE ========== */
+        .section-title {
+            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 2rem;
+            border-left: 5px solid #c0392b;
+            padding-left: 1rem;
+            color: #1a1a2e;
+        }
+
+        /* ========== BIOGRAPHY CARD ========== */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .bio-text {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .bio-text p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .bio-image {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: 800px;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            background: #f9f9f9;
+        }
+
+        /* ========== TIMELINE ========== */
+        .timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .timeline-year {
+            min-width: 100px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #c0392b;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 0.3rem;
+            color: #1a1a2e;
+        }
+
+        /* ========== GALLERY / ETALASE ========== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .gallery-item img {
+            width: 120%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .gallery-item .info {
+            padding: 1rem;
+            text-align: match-parent;
+        }
+
+        .gallery-item .info h4 {
+            margin-bottom: 0.3rem;
+            color: #c0392b;
+        }
+
+        .gallery-item .info p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* ========== QUOTE ========== */
+        .quote {
+            background: #1a1a2e;
+            color: #ffd700;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: #1a1a2e;
+            color: #aaa;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .bio-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR FLEXBOX ========== -->
+<nav class="navbar">
+    <div class="logo">
+        <i class="fas fa-crown"></i>
+        <span>Napoleon <span style="color:#c0392b;">Bonaparte</span></span>
+    </div>
+    <ul class="nav-menu">
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#biografi">Biografi</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#gallery">Galeri</a></li>
+    </ul>
+</nav>
+
+<!-- ========== HERO SECTION ========== -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>Napoleon Bonaparte</h1>
+        <p>1769 - 1821 | Kaisar Prancis | Jenderal Legendaris</p>
+    </div>
+</section>
+
+<!-- ========== MAIN CONTENT ========== -->
+<div class="container">
+
+    <!-- Biografi Section -->
+    <section id="biografi">
+        <h2 class="section-title"><i class="fas fa-user-graduate"></i> Siapa Itu Napoleon?</h2>
+        <div class="bio-grid">
+            <div class="bio-text">
+                <p><strong>Napoleon Bonaparte</strong> (15 Agustus 1769 - 5 Mei 1821) adalah seorang jenderal militer dan kaisar Prancis yang memerintah dari tahun 1804 hingga 1814, dan kembali sebentar pada tahun 1815. Ia dianggap sebagai salah satu pemimpin militer terbesar dalam sejarah.</p>
+                <p>Napoleon lahir di <strong>Ajaccio, Corsica</strong> (saat itu baru saja dibeli oleh Prancis). Ia naik pangkat dengan cepat selama Revolusi Prancis, memenangkan serangkaian kemenangan gemilang. Pada tahun 1799, ia merebut kekuasaan dalam <strong>Kudeta 18 Brumaire</strong> dan menjadi Konsul Pertama.</p>
+                <p>Pada tahun 1804, ia memahkotai dirinya sendiri sebagai <strong>Kaisar Prancis</strong>. Sepanjang karirnya, ia memimpin pasukannya dalam <strong>Perang Napoleon</strong> yang melibatkan hampir seluruh Eropa. Puncak kejayaannya adalah menguasai hampir seluruh daratan Eropa.</p>
+                <p>Namun, invasi ke Rusia pada tahun 1812 menjadi awal kehancurannya. Ia diasingkan ke Pulau Elba, lalu kembali berkuasa selama <strong>"100 Hari"</strong>, sebelum akhirnya dikalahkan dalam <strong>Pertempuran Waterloo</strong> (1815). Napoleon meninggal dalam pengasingan di Pulau Saint Helena pada tahun 1821.</p>
+            </div>
+            <div class="bio-image">
+                <img src="assets/napoleon-hero.jpg">
+                <div class="image-caption">
+                    <i class="fas fa-camera"></i> Napoleon dalam lukisan "Napoleon on his Imperial Throne" (1806) karya Jean-Auguste-Dominique Ingres
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline">
+        <h2 class="section-title"><i class="fas fa-history"></i> Garis Waktu Perjalanan Napoleon</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">1769</div>
+                <div class="timeline-content"><h3>Lahir</h3><p>Lahir di Ajaccio, Corsica, dari keluarga bangsawan kecil.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1796</div>
+                <div class="timeline-content"><h3>Kampanye Italia</h3><p>Memimpin pasukan Prancis meraih kemenangan besar melawan Austria.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1799</div>
+                <div class="timeline-content"><h3>Kudeta Brumaire</h3><p>Merebut kekuasaan Prancis, menjadi Konsul Pertama.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1804</div>
+                <div class="timeline-content"><h3>Menjadi Kaisar</h3><p>Memahkotai dirinya sebagai Kaisar Prancis di Notre-Dame.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1812</div>
+                <div class="timeline-content"><h3>Invasi Rusia</h3><p>Bencana besar: 500.000 tentara tewas atau hilang di musim dingin Rusia.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1815</div>
+                <div class="timeline-content"><h3>Waterloo</h3><p>Kekalahan telak melawan Inggris & Prusia, diasingkan ke Saint Helena.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">1821</div>
+                <div class="timeline-content"><h3>Wafat</h3><p>Meninggal dalam pengasingan di usia 51 tahun (diduga karena kanker lambung).</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Etalase Section -->
+    <section id="gallery">
+        <h2 class="section-title"><i class="fas fa-images"></i> Galeri & Etalase</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="assets/gallery-1.jpg">
+                <div class="info">
+                    <h4>Napoleon Melewati Alpen</h4>
+                    <p>Lukisan terkenal karya Jacques-Louis David (1801)</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/gallery-2.jpg">
+                    <h4>Pertempuran Eylau (1807)</h4>
+                    <p>Salah satu pertempuran paling berdarah</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/napoleon-hero.jpg">
+                <div class="info">
+                    <h4>Mahkota Kekaisaran</h4>
+                    <p>Simbol kekuasaan Napoleon sebagai Kaisar</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/gallery-4.jpg" alt="Penobatan Napoleon">
+                <div class="info">
+                    <h4>Penobatan Napoleon</h4>
+                    <p>Upacara penobatan di Notre-Dame, 1804</p>
+                </div>
+            </div>
+        </div>
+        <div class="audio-note" style="text-align: center; margin-top: -1rem;">
+            <i class="fas fa-info-circle"></i> <strong>Petunjuk Gambar:</strong> Klik atau hover pada gambar untuk melihat detail. Semua gambar diambil dari sumber domain publik (Wikimedia Commons) untuk keperluan edukasi.
+        </div>
+    </section>
+
+    <!-- Kutipan Terkenal -->
+    <div class="quote">
+        <i class="fas fa-quote-left"></i> "There is no immortality but the memory that is left in the minds of men." <br>
+        <span style="font-size: 0.9rem;">— Napoleon Bonaparte</span>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p><i class="far fa-copyright"></i> 2026 | Haydy Haidar Khalifi | Sejarah Singkat Napo leon Bonaparte | Website Edukasi</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">Dibuat dengan  <i class="fas fa-heart" style="color: #c0392b;"></i>  menggunakan HTML & CSS Flexbox</p>
+</footer>
+
+</body>
+</html>

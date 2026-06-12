@@ -1,0 +1,523 @@
+/* ========================================
+   RESET & VARIABLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #8b5cf6;
+    --success: #10b981;
+    --dark: #0f172a;
+    --dark-soft: #1e2a3e;
+    --gray: #334155;
+    --gray-light: #475569;
+    --bg-light: #f1f5f9;
+    --bg-white: #ffffff;
+    --border: #cbd5e1;
+    --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 25px 30px -12px rgba(0, 0, 0, 0.15);
+    --radius-lg: 3rem;
+    --radius-md: 1.8rem;
+    --radius-sm: 1rem;
+    --transition: all 0.3s ease;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+body {
+    background: linear-gradient(145deg, #eef2f9 0%, #d9e0eb 100%);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    color: var(--dark-soft);
+    padding: 2rem 1.5rem;
+    min-height: 100vh;
+}
+
+/* ========================================
+   MAIN CONTAINER
+   ======================================== */
+
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(2px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm), 0 1px 2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: var(--transition);
+    animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   PROFILE HEADER
+   ======================================== */
+
+.profile-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2.5rem 3rem;
+    background: linear-gradient(135deg, var(--bg-white) 0%, #f8fafc 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.avatar-section {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 5px;
+    box-shadow: 0 20px 35px -10px rgba(59, 130, 246, 0.4);
+    transition: transform 0.3s;
+}
+
+.avatar-wrapper:hover {
+    transform: scale(1.02);
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--bg-white);
+    background: var(--border);
+}
+
+.status-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--success);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 3px solid var(--bg-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status-badge i {
+    font-size: 12px;
+    color: var(--bg-white);
+}
+
+.info-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-section h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(120deg, var(--dark), #2d3a5e);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--primary);
+    background: #eef2ff;
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border-radius: 40px;
+    margin-bottom: 1.2rem;
+    width: fit-content;
+}
+
+.bio {
+    color: var(--gray);
+    font-size: 1rem;
+    max-width: 500px;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-light);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: #1e293b;
+    transition: var(--transition);
+}
+
+.contact-item i {
+    color: var(--primary);
+    width: 20px;
+    font-size: 1rem;
+}
+
+.contact-item:hover {
+    background: var(--border);
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   PROFILE CONTENT (GRID)
+   ======================================== */
+
+.profile-content {
+    padding: 2rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* ========================================
+   CARD COMPONENT
+   ======================================== */
+
+.card {
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
+    padding: 1.8rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid rgba(203, 213, 225, 0.4);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+    color: var(--dark);
+    border-left: 5px solid var(--primary);
+    padding-left: 18px;
+}
+
+.card-title i {
+    color: var(--primary);
+    font-size: 1.6rem;
+}
+
+/* ========================================
+   SKILLS SECTION
+   ======================================== */
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.skill-badge {
+    background: linear-gradient(115deg, #eef2ff, var(--bg-white));
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1e293b;
+    transition: var(--transition);
+    backdrop-filter: blur(2px);
+}
+
+.skill-badge:hover {
+    background: var(--primary);
+    color: var(--bg-white);
+    border-color: var(--primary);
+    transform: scale(1.03);
+}
+
+.progress-container {
+    margin-top: 1.5rem;
+}
+
+.progress-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-bottom: 6px;
+}
+
+.progress-bar-bg {
+    background: var(--border);
+    border-radius: 50px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 6px;
+    border-radius: 50px;
+}
+
+.progress-primary {
+    background: var(--primary);
+}
+
+.progress-secondary {
+    background: var(--secondary);
+}
+
+/* ========================================
+   HOBI SECTION
+   ======================================== */
+
+.hobi-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hobi-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1rem;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+}
+
+.hobi-item i {
+    width: 32px;
+    font-size: 1.3rem;
+    color: var(--secondary);
+    text-align: center;
+}
+
+.quote-box {
+    margin-top: 1.4rem;
+    background: #f1f5fe;
+    border-radius: var(--radius-sm);
+    padding: 0.8rem;
+    font-style: italic;
+    font-size: 0.85rem;
+    border-left: 3px solid var(--primary);
+}
+
+/* ========================================
+   STATS SECTION
+   ======================================== */
+
+.stats-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+    background: var(--bg-light);
+    border-radius: 1.2rem;
+    padding: 12px 0;
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-light);
+}
+
+/* ========================================
+   SOCIAL MEDIA
+   ======================================== */
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    background: var(--bg-light);
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    font-size: 1.6rem;
+    color: var(--gray);
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px);
+    background: var(--primary);
+    color: var(--bg-white);
+    box-shadow: 0 10px 15px -5px rgba(59, 130, 246, 0.5);
+}
+
+.collab-box {
+    margin-top: 1.2rem;
+    font-size: 0.8rem;
+    background: #eef2ff;
+    padding: 0.6rem;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* ========================================
+   EDUCATION & LANGUAGE SECTION
+   ======================================== */
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.education-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.progress-tag {
+    width: 100%;
+    height: 6px;
+    border-radius: 20px;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.profile-footer {
+    background: var(--bg-light);
+    text-align: center;
+    padding: 1.2rem;
+    font-size: 0.8rem;
+    color: #5b6e8c;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+    
+    .info-section {
+        align-items: center;
+    }
+    
+    .bio {
+        text-align: center;
+    }
+    
+    .contact-info {
+        justify-content: center;
+    }
+    
+    .profile-content {
+        padding: 1.8rem;
+        gap: 1.5rem;
+    }
+    
+    .info-section h1 {
+        font-size: 2rem;
+    }
+    
+    .avatar-wrapper {
+        width: 170px;
+        height: 170px;
+    }
+    
+    .card-title {
+        font-size: 1.4rem;
+    }
+    
+    .extra-padding {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        flex-direction: column;
+    }
+    
+    .contact-item {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.8rem;
+    }
+}
+
+/* Utility Classes */
+.extra-padding {
+    padding: 0 3rem 2rem 3rem;
+}
