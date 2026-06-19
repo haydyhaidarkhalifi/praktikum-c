@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Data Mahasiswa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f2f7 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 32px 30px 40px;
+            box-shadow: 0 20px 40px rgba(0, 20, 30, 0.15), 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.2s;
+        }
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: #0b2b3d;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+            border-bottom: 3px solid #3b8ea5;
+            padding-bottom: 16px;
+        }
+        h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #2d6a7a;
+            margin-left: auto;
+            background: #d4e7ef;
+            padding: 4px 14px;
+            border-radius: 40px;
+        }
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 18px;
+            margin-bottom: 28px;
+            background: #ffffffcc;
+            padding: 22px 20px 20px;
+            border-radius: 28px;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 4px 12px rgba(0, 20, 30, 0.06);
+        }
+        .input-field {
+            flex: 1 1 180px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .input-field label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #1f4b5a;
+            margin-left: 6px;
+        }
+        .input-field input {
+            background: #f2f8fc;
+            border: 1px solid #cddde6;
+            border-radius: 60px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            outline: none;
+            color: #0a2530;
+        }
+        .input-field input:focus {
+            border-color: #2f809b;
+            box-shadow: 0 0 0 3px rgba(47, 128, 155, 0.25);
+            background: #ffffff;
+        }
+        .input-field input::placeholder {
+            color: #8aaebd;
+            font-weight: 300;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 12px;
+            justify-content: flex-end;
+        }
+        .btn {
+            border: none;
+            background: #e3eef5;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a4455;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #d0e0e9;
+            flex: 1 1 auto;
+        }
+        .btn-primary {
+            background: #1d6f89;
+            border-color: #1a5f77;
+            color: white;
+            box-shadow: 0 6px 12px rgba(26, 95, 119, 0.2);
+        }
+        .btn-primary:hover {
+            background: #13586f;
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(19, 88, 111, 0.25);
+        }
+        .btn-secondary {
+            background: #dceaf2;
+            border-color: #bed3df;
+        }
+        .btn-secondary:hover {
+            background: #c7dce8;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #2d7b94;
+            color: #1f5f77;
+        }
+        .btn-outline:hover {
+            background: #1f6b84;
+            color: white;
+            border-color: #1f6b84;
+        }
+        .btn-warning {
+            background: #f3d8c2;
+            border-color: #dbbca3;
+            color: #6f3f28;
+        }
+        .btn-warning:hover {
+            background: #edc8ac;
+        }
+        .btn-danger {
+            background: #f7d4d4;
+            border-color: #e7b9b9;
+            color: #8f3a3a;
+        }
+        .btn-danger:hover {
+            background: #f0bfbf;
+        }
+        .info-panel {
+            margin: 24px 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .badge {
+            background: #d1e6ef;
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #124151;
+        }
+        .table-wrapper {
+            background: #ffffffd9;
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 6px 6px 10px;
+            overflow-x: auto;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 6px 18px rgba(0,20,30,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 300px;
+        }
+        th {
+            text-align: left;
+            padding: 16px 12px 12px 18px;
+            font-weight: 600;
+            color: #15414f;
+            border-bottom: 2px solid #c1d8e3;
+            letter-spacing: 0.3px;
+        }
+        td {
+            padding: 14px 12px 14px 18px;
+            border-bottom: 1px solid #d8e7f0;
+            color: #133a47;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .empty-row td {
+            color: #7899a8;
+            font-style: italic;
+            text-align: center;
+            padding: 28px 12px;
+            letter-spacing: 0.3px;
+        }
+        .nilai-badge {
+            background: #d4e7f0;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #b15a5a;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 30px;
+            transition: 0.15s;
+            font-weight: 500;
+        }
+        .delete-btn:hover {
+            background: #fce5e5;
+            color: #a33c3c;
+            transform: scale(1.1);
+        }
+        .footer-info {
+            margin-top: 18px;
+            font-size: 0.8rem;
+            color: #3c6e7e;
+            text-align: right;
+            opacity: 0.8;
+        }
+        @media (max-width: 480px) {
+            .card { padding: 20px 16px; }
+            .form-group { flex-direction: column; gap: 12px; }
+            .action-buttons .btn { flex: 1 1 100%; }
+            h1 { font-size: 1.7rem; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>
+            🧑‍🎓 Data Mahasiswa
+            <small>✨ DOM + Event</small>
+        </h1>
+
+        <!-- Form input -->
+        <div class="form-group">
+            <div class="input-field">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="contoh: Haydy Haidar Khalifi" autocomplete="off">
+            </div>
+            <div class="input-field">
+                <label for="nilai">Nilai</label>
+                <input type="number" id="nilai" placeholder="0 – 100" min="0" max="100" step="0.1">
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="simpanBtn">💾 Simpan</button>
+                <button class="btn btn-secondary" id="tampilkanBtn">📋 Tampilkan</button>
+            </div>
+        </div>
+
+        <!-- Panel info & tombol reset -->
+        <div class="info-panel">
+            <span class="badge" id="jumlahData">📌 0 mahasiswa</span>
+            <button class="btn btn-warning" id="resetBtn" style="flex:0 1 auto; padding: 6px 22px;">🔄 Reset semua</button>
+        </div>
+
+        <!-- Tabel data mahasiswa -->
+        <div class="table-wrapper">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nama</th>
+                        <th style="text-align:center;">Nilai</th>
+                        <th style="text-align:right;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr class="empty-row">
+                        <td colspan="4">📭 Belum ada data. Silakan tambahkan mahasiswa.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-info">
+            ⚡ Menggunakan DOM, Event, Fungsi, dan Array JavaScript
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ----- ARRAY penyimpanan data mahasiswa -----
+            let mahasiswa = [];
+
+            // ----- REFERENSI DOM -----
+            const namaInput = document.getElementById('nama');
+            const nilaiInput = document.getElementById('nilai');
+            const simpanBtn = document.getElementById('simpanBtn');
+            const tampilkanBtn = document.getElementById('tampilkanBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const tableBody = document.getElementById('tableBody');
+            const jumlahDataSpan = document.getElementById('jumlahData');
+
+            // ----- FUNGSI UTILITY -----
+            // Fungsi untuk merender tabel berdasarkan array mahasiswa
+            function renderTable() {
+                // Kosongkan tbody
+                tableBody.innerHTML = '';
+
+                // Jika array kosong, tampilkan pesan
+                if (mahasiswa.length === 0) {
+                    const emptyRow = document.createElement('tr');
+                    emptyRow.className = 'empty-row';
+                    emptyRow.innerHTML = `<td colspan="4">📭 Belum ada data. Silakan tambahkan mahasiswa.</td>`;
+                    tableBody.appendChild(emptyRow);
+                    updateJumlahData();
+                    return;
+                }
+
+                // Looping data mahasiswa
+                mahasiswa.forEach((mhs, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Kolom nomor urut (index + 1)
+                    const noCell = document.createElement('td');
+                    noCell.textContent = index + 1;
+                    
+                    // Kolom nama
+                    const namaCell = document.createElement('td');
+                    namaCell.textContent = mhs.nama;
+                    
+                    // Kolom nilai (dengan badge)
+                    const nilaiCell = document.createElement('td');
+                    nilaiCell.style.textAlign = 'center';
+                    const nilaiSpan = document.createElement('span');
+                    nilaiSpan.className = 'nilai-badge';
+                    // Format nilai: jika angka bulat tampilkan tanpa desimal
+                    const nilaiFormatted = Number.isInteger(mhs.nilai) ? mhs.nilai : mhs.nilai.toFixed(1);
+                    nilaiSpan.textContent = nilaiFormatted;
+                    nilaiCell.appendChild(nilaiSpan);
+                    
+                    // Kolom aksi (tombol hapus per item)
+                    const aksiCell = document.createElement('td');
+                    aksiCell.style.textAlign = 'right';
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.innerHTML = '✕';
+                    deleteBtn.setAttribute('aria-label', 'Hapus mahasiswa');
+                    // Event listener untuk tombol hapus (menggunakan event)
+                    deleteBtn.addEventListener('click', function(event) {
+                        // Hentikan propagasi agar tidak memicu event lain
+                        event.stopPropagation();
+                        // Hapus data dari array berdasarkan index
+                        mahasiswa.splice(index, 1);
+                        // Render ulang tabel
+                        renderTable();
+                        // (Opsional) fokus ke input
+                        namaInput.focus();
+                    });
+                    aksiCell.appendChild(deleteBtn);
+                    
+                    // Gabungkan semua sel ke baris
+                    row.appendChild(noCell);
+                    row.appendChild(namaCell);
+                    row.appendChild(nilaiCell);
+                    row.appendChild(aksiCell);
+                    
+                    tableBody.appendChild(row);
+                });
+
+                updateJumlahData();
+            }
+
+            // Fungsi untuk memperbarui badge jumlah data
+            function updateJumlahData() {
+                const count = mahasiswa.length;
+                jumlahDataSpan.textContent = `📌 ${count} mahasiswa`;
+            }
+
+            // Fungsi untuk menambahkan mahasiswa baru (dari input)
+            function tambahMahasiswa() {
+                // Ambil nilai dari input, trim
+                const nama = namaInput.value.trim();
+                let nilai = parseFloat(nilaiInput.value);
+
+                // ----- Validasi -----
+                // 1. Nama tidak boleh kosong
+                if (nama === '') {
+                    alert('⚠️ Nama mahasiswa harus diisi.');
+                    namaInput.focus();
+                    return false;
+                }
+
+                // 2. Nilai harus berupa angka dan dalam rentang 0–100
+                if (isNaN(nilai) || nilai < 0 || nilai > 100) {
+                    alert('⚠️ Nilai harus berupa angka antara 0 sampai 100.');
+                    nilaiInput.focus();
+                    nilaiInput.select();
+                    return false;
+                }
+
+                // (Opsional) Pembulatan nilai menjadi 1 desimal agar rapi
+                nilai = Math.round(nilai * 10) / 10;
+
+                // ----- Tambahkan ke array -----
+                mahasiswa.push({ nama, nilai });
+
+                // ----- Reset input (kosongkan) -----
+                namaInput.value = '';
+                nilaiInput.value = '';
+                namaInput.focus();
+
+                // ----- Render ulang tabel -----
+                renderTable();
+                return true;
+            }
+
+            // Fungsi untuk menampilkan data (alert) – sesuai fitur "tombol tampilkan"
+            function tampilkanDataAlert() {
+                if (mahasiswa.length === 0) {
+                    alert('📭 Belum ada data mahasiswa.');
+                    return;
+                }
+
+                // Buat string ringkasan
+                let pesan = '📋 DAFTAR MAHASISWA\n';
+                pesan += '——————————————————\n';
+                mahasiswa.forEach((mhs, i) => {
+                    const nilaiStr = Number.isInteger(mhs.nilai) ? mhs.nilai : mhs.nilai.toFixed(1);
+                    pesan += `${i+1}. ${mhs.nama}  →  ${nilaiStr}\n`;
+                });
+                pesan += '——————————————————\n';
+                pesan += `Total: ${mahasiswa.length} mahasiswa`;
+                alert(pesan);
+            }
+
+            // Fungsi reset (hapus semua data)
+            function resetSemuaData() {
+                if (mahasiswa.length === 0) {
+                    alert('📭 Data sudah kosong.');
+                    return;
+                }
+                const konfirmasi = confirm('⚠️ Yakin ingin menghapus SEMUA data mahasiswa?');
+                if (konfirmasi) {
+                    mahasiswa = [];          // kosongkan array
+                    renderTable();           // render ulang
+                    namaInput.focus();
+                }
+            }
+
+            // ----- EVENT LISTENER (menggunakan Event) -----
+
+            // 1. Tombol Simpan
+            simpanBtn.addEventListener('click', function(event) {
+                event.preventDefault();  // prevent default (tidak ada form, tapi aman)
+                tambahMahasiswa();
+            });
+
+            // 2. Tombol Tampilkan (alert)
+            tampilkanBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                tampilkanDataAlert();
+            });
+
+            // 3. Tombol Reset Semua
+            resetBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                resetSemuaData();
+            });
+
+            // 4. (Tambahan) Enter pada input nama atau nilai untuk menyimpan cepat
+            function handleEnter(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    // Jika fokus di input nama atau nilai, langsung simpan
+                    if (e.target === namaInput || e.target === nilaiInput) {
+                        tambahMahasiswa();
+                    }
+                }
+            }
+            namaInput.addEventListener('keydown', handleEnter);
+            nilaiInput.addEventListener('keydown', handleEnter);
+
+            // 5. (Ekstra) Fokus ke input nama saat halaman dimuat
+            window.addEventListener('load', function() {
+                namaInput.focus();
+                // Render awal (array kosong)
+                renderTable();
+            });
+
+            // 6. (Opsional) Contoh penggunaan DOM untuk interaksi kecil:
+            // Ketika input nilai kehilangan fokus, kita bisa format (tapi tidak wajib)
+            // hanya untuk pengalaman lebih baik.
+            nilaiInput.addEventListener('blur', function() {
+                let val = parseFloat(this.value);
+                if (!isNaN(val) && val >= 0 && val <= 100) {
+                    // bulatkan ke 1 desimal
+                    this.value = Math.round(val * 10) / 10;
+                }
+            });
+
+            // ----- EKSPOS (tidak wajib) -----
+            // Kita bisa menaruh fungsi di global untuk debugging, tapi tidak diperlukan.
+            // Yang penting: semua fitur menggunakan DOM, Event, Fungsi, dan Array.
+
+            console.log('✅ Sistem Data Mahasiswa siap!');
+        })();
+    </script>
+
+</body>
+</html>
