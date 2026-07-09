@@ -1,0 +1,14 @@
+{
+  "name": "praktikum-nodejs",
+  "version": "1.0.0",
+  "description": "Praktikum Pemrograman Dasar - Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "biodata": "node biodata.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["nodejs", "http-server", "praktikum"],
+  "author": "Haydy Haidar Khalifi",
+  "license": "MIT"
+}
